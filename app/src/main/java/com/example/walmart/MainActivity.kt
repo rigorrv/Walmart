@@ -11,7 +11,7 @@ import com.example.walmart.viewmodel.CountryVMFactory
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var adapter: CountriesAdapter
+    private val adapter = CountriesAdapter()
     private val viewModel: CountryVM by lazy {
         ViewModelProvider(this, CountryVMFactory())[CountryVM::class.java]
     }
@@ -21,8 +21,8 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.activity_main)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         viewModel.countriesLiveData.observe(this) { data ->
-            data?.let {
-                adapter = CountriesAdapter(it)
+            data?.countryItems?.let {
+                adapter.getCountryList(it)
                 recyclerView.adapter = adapter
             }
         }

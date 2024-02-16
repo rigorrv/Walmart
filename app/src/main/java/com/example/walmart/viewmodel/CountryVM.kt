@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.walmart.model.CountryDB
-import com.example.walmart.repository.Repository
+import com.example.walmart.model.CountryDomain
+import com.example.walmart.repository.ApiRepository
 import kotlinx.coroutines.launch
 
-class CountryVM(private val repository: Repository) : ViewModel() {
+class CountryVM(private val repository: ApiRepository) : ViewModel() {
 
-    private val _countriesLiveData = MutableLiveData<CountryDB?>(null)
-    val countriesLiveData: LiveData<CountryDB?> = _countriesLiveData
+    private val _countriesLiveData = MutableLiveData<CountryDomain?>(null)
+    val countriesLiveData: LiveData<CountryDomain?> = _countriesLiveData
 
     init {
         getCountries()
@@ -19,8 +19,8 @@ class CountryVM(private val repository: Repository) : ViewModel() {
 
     private fun getCountries() {
         viewModelScope.launch {
-            repository.getCountries().apply {
-                _countriesLiveData.value = this
+            repository.getCountries().let { data ->
+                _countriesLiveData.value = data
             }
         }
     }
