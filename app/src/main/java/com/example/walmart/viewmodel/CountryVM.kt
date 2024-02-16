@@ -19,8 +19,8 @@ class CountryVM(private val repository: Repository) : ViewModel() {
 
     private fun getCountries() {
         viewModelScope.launch {
-            repository.getCountries().apply {
-                _countriesLiveData.value = this
+            repository.getCountries().let { data ->
+                _countriesLiveData.value = data
             }
         }
     }
