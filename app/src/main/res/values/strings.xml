@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Walmart</string>
+    <string name="space_name">,\u0020</string>
 </resources>
