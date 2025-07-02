@@ -1,8 +1,8 @@
 package com.example.walmart.repository
 
-import com.example.walmart.model.CountryDB
+import com.example.walmart.model.CountryDomain
 
 interface ApiRepository {
 
-    suspend fun getCountries(): CountryDB?
+    suspend fun getCountries(): Result<CountryDomain?>
 }

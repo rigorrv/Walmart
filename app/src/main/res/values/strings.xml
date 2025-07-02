@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Walmart</string>
     <string name="space_name">,\u0020</string>
+    <string name="error_msg">Error</string>
+    <string name="ok_alert_dialog">Ok</string>
+    <string name="something_went_wrong_msg">Something went wrong</string>
 </resources>

@@ -1,11 +1,9 @@
 package com.example.walmart
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.walmart.model.CountryDB
-import com.example.walmart.model.CountryDBItem
-import com.example.walmart.model.Currency
-import com.example.walmart.model.Language
-import com.example.walmart.repository.Repository
+import com.example.walmart.model.CountryDomain
+import com.example.walmart.model.CountryItems
+import com.example.walmart.repository.ApiRepository
 import com.example.walmart.viewmodel.CountryVM
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -20,13 +18,13 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-class CountryVMTest {
+class CountryDomainVMTest {
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
     @Mock
-    lateinit var repository: Repository
+    lateinit var repository: ApiRepository
     lateinit var viewModel: CountryVM
     private val dispatcher = StandardTestDispatcher()
 
@@ -39,17 +37,11 @@ class CountryVMTest {
 
     @Test
     fun fetchApi() = runTest {
-        val content = CountryDB()
-        content.add(
-            CountryDBItem(
-                "",
-                "",
-                Currency("", "", ""),
-                "",
-                "",
-                Language("", "", "", ""),
-                "",
-                ""
+        val content = CountryDomain(
+            listOf(
+                CountryItems(
+                    name = "", region = "", code = "", capital = ""
+                )
             )
         )
         Mockito.`when`(repository.getCountries()).thenReturn(content)
